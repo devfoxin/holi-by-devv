@@ -3,49 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CREATE CARD — Holi '26</title>
+    <title>Create Your Holi Card</title>
     <link rel="stylesheet" href="style.css">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-    <style>
-        .card-creator { padding-top: 130px; padding-bottom: 50px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        
-        /* The Card Preview - Styled 9:16 like Insta Story */
-        #card-preview {
-            width: 320px; height: 568px; /* Classic 9:16 mobile ratio */
-            background: #111; border: 4px solid #fff; border-radius: 20px;
-            position: relative; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 30px; text-align: center; margin-bottom: 40px;
-        }
-        
-        /* Aesthetic background inside the card */
-        .card-bg { position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1; opacity: 0.6; background: radial-gradient(circle at center, #222 0%, #000 100%);}
-        .paint-splatter { position: absolute; border-radius: 50%; filter: blur(30px); z-index: 2; opacity: 0.8;}
-
-        /* Card Text styling */
-        .card-content { z-index: 10; position: relative; width: 100%; }
-        #card-greeting { font-family: var(--font-main); font-size: 2.2rem; line-height: 1; text-transform: uppercase; color: #fff; margin-bottom: 10px; }
-        #card-greeting span { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-        #card-message { font-family: var(--font-body); font-weight: 300; font-size: 0.9rem; opacity: 0.9; line-height: 1.6; margin-bottom: 30px; color: #eee;}
-        #card-from { font-family: var(--font-main); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--secondary); border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px; display: inline-block;}
-
-        /* Controls Area */
-        .controls { background: var(--glass); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); width: 90%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; }
-        .controls h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; color: var(--secondary);}
-        input, select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 12px; color: white; border-radius: 8px; font-family: var(--font-body); font-size: 0.9rem;}
-        input:focus { outline: 1px solid var(--secondary); background: rgba(255,255,255,0.1);}
-        
-        .action-btns { display: flex; gap: 15px; margin-top: 20px;}
-        .share-btn { background: #E1306C; color: white; flex: 1; text-align: center;} /* Instagram Color */
-        .share-btn:hover { background: #b12555; transform: translateY(-3px);}
-
-        @media (max-width: 768px) {
-            #card-preview { width: 280px; height: 497px; }
-            #card-greeting { font-size: 1.8rem; }
-        }
-    </style>
 </head>
 <body>
     <canvas id="canvas"></canvas>
@@ -55,114 +15,34 @@
         <ul class="nav-links">
             <li><a href="history.html">Mythos</a></li>
             <li><a href="card.html" class="active">Create Card</a></li>
-            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="creators.html">Creators</a></li>
         </ul>
     </nav>
 
-    <main class="card-creator">
+    <main style="padding-top: 140px; display: flex; flex-direction: column; align-items: center;">
         
         <div id="card-preview">
-            <div class="card-bg"></div>
-            <div id="splatter-container"></div>
-            
+            <div id="splatter-container" style="position: absolute; top:0; left:0; width:100%; height:100%;"></div>
             <div class="card-content">
                 <h2 id="card-greeting">HAPPY <br><span>HOLI</span></h2>
-                <p id="card-message">May your life be as vibrant and colorful as the festival itself. Wishing you joy, laughter, and splashes of happiness!</p>
-                <p id="card-from">— From </p>
+                <p id="card-message">May your life be as vibrant and colorful as the festival itself.</p>
+                <p id="card-from">— FROM [YOUR NAME]</p>
             </div>
         </div>
 
         <section class="controls">
-            <h3>Customize Your Vibe</h3>
-            <input type="text" id="input-from" placeholder="Your Name (e.g., Rahul)" maxlength="20">
+            <input type="text" id="input-from" placeholder="Enter Your Name" maxlength="20">
             
             <select id="input-message">
-                <option value="May your life be as vibrant and colorful as the festival itself. Wishing you joy and laughter!">Classic Vibe</option>
-                <option value="Let the colors of Holi paint a path to success, happiness, and prosperity for you and your family.">Prosperity Vibe</option>
-                <option value="Drenched in joy, dipped in colors. Wishing you a messy, fun, and truly memorable Holi!">Party Vibe</option>
+                <option value="May your life be as vibrant and colorful as the festival itself.">The Classic Vibe</option>
+                <option value="Drenched in joy, dipped in colors. Wishing you a messy, fun Holi!">The Party Vibe</option>
+                <option value="Let the colors of Holi paint a path to success and prosperity.">The Success Vibe</option>
             </select>
 
-            <div class="action-btns">
-                <button id="download-btn" class="share-btn btn">Download for Insta Story</button>
-            </div>
+            <button id="download-btn" class="primary-btn btn">DOWNLOAD FOR INSTA STORY</button>
         </section>
     </main>
 
-    <script>
-        // PAGE SPECIFIC SCRIPT
-        
-        // 1. Live Update functionality
-        const inputFrom = document.getElementById('input-from');
-        const inputMessage = document.getElementById('input-message');
-        const cardFrom = document.getElementById('card-from');
-        const cardMessage = document.getElementById('card-message');
-        const splatterContainer = document.getElementById('splatter-container');
-
-        const palette = ['#ff007f', '#00f2ff', '#39ff14', '#fdfd96', '#bc13fe'];
-
-        // Add random aesthetic splatters to the card background
-        function generateSplatter() {
-            splatterContainer.innerHTML = ''; // Clear existing
-            for(let i=0; i<4; i++) {
-                const splatter = document.createElement('div');
-                splatter.className = 'paint-splatter';
-                const size = Math.random() * 200 + 100 + 'px';
-                splatter.style.width = size;
-                splatter.style.height = size;
-                splatter.style.background = palette[Math.floor(Math.random()*palette.length)];
-                splatter.style.top = Math.random() * 80 + '%';
-                splatter.style.left = Math.random() * 80 - 10 + '%';
-                splatterContainer.appendChild(splatter);
-            }
-        }
-        generateSplatter(); // Init
-
-        inputFrom.addEventListener('input', (e) => {
-            if(e.target.value) {
-                cardFrom.innerText = `— From ${e.target.value}`;
-            } else {
-                cardFrom.innerText = `— From [Your Name]`;
-            }
-        });
-
-        inputMessage.addEventListener('change', (e) => {
-            cardMessage.innerText = e.target.value;
-            generateSplatter(); // Change splatters when message changes for fun
-        });
-
-        // 2. The "Screenshot/Share" logic using html2canvas
-        const downloadBtn = document.getElementById('download-btn');
-        const cardPreview = document.getElementById('card-preview');
-
-        downloadBtn.addEventListener('click', () => {
-            downloadBtn.innerText = "Generating...";
-            downloadBtn.style.opacity = '0.5';
-
-            // Capture the specific 9:16 DIV
-            html2canvas(cardPreview, {
-                scale: 2, // Double quality for retinal screens/high res
-                backgroundColor: null, // Keep transparency if any
-                logging: false,
-                useCORS: true // Allow loading external fonts if needed
-            }).then(canvas => {
-                // Convert canvas to image data
-                const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-                
-                // Create a temporary link to trigger download
-                const link = document.createElement('a');
-                link.download = 'holi-story-26.png';
-                link.href = image;
-                link.click();
-
-                // Reset button
-                downloadBtn.innerText = "Download for Insta Story";
-                downloadBtn.style.opacity = '1';
-                
-                // Alert visual cue for mobile
-                alert("Image saved to your gallery! Upload it to your Instagram Story now. 🎉");
-            });
-        });
-    </script>
     <script src="script.js"></script>
 </body>
 </html>
