@@ -1,10 +1,11 @@
 /**
- * HOLI '26 MASTER SCRIPT
+ * HOLI '26 - ALL-IN-ONE SCRIPT
+ * Handles: Particles, Card Customization, and Image Export
  */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- PART 1: DIGITAL GULAAL (ALL PAGES) ---
+    // --- 1. THE PARTICLE ENGINE (DIGITAL GULAAL) ---
     const canvas = document.getElementById('canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         class Particle {
             constructor(x, y) {
                 this.x = x; this.y = y;
-                this.size = Math.random() * 15 + 5;
+                this.size = Math.random() * 14 + 4;
                 this.speedX = Math.random() * 4 - 2;
                 this.speedY = Math.random() * 4 - 2;
                 this.color = colors[Math.floor(Math.random() * colors.length)];
@@ -41,14 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        const addParticles = (e) => {
+        const triggerParticles = (e) => {
             const x = e.touches ? e.touches[0].clientX : e.clientX;
             const y = e.touches ? e.touches[0].clientY : e.clientY;
             for (let i = 0; i < 2; i++) particles.push(new Particle(x, y));
         };
 
-        window.addEventListener('mousemove', addParticles);
-        window.addEventListener('touchmove', addParticles, { passive: true });
+        window.addEventListener('mousemove', triggerParticles);
+        window.addEventListener('touchmove', triggerParticles, { passive: true });
 
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -61,56 +62,69 @@ document.addEventListener('DOMContentLoaded', () => {
         animate();
     }
 
-    // --- PART 2: GREETING CARD ENGINE (CARD PAGE ONLY) ---
+    // --- 2. THE CARD ENGINE (FOR CARD.HTML) ---
     const cardPreview = document.getElementById('card-preview');
     if (cardPreview) {
-        const inputFrom = document.getElementById('input-from');
+        const inputName = document.getElementById('input-from');
         const inputMsg = document.getElementById('input-message');
-        const cardFrom = document.getElementById('card-from');
-        const cardMsg = document.getElementById('card-message');
-        const splatterContainer = document.getElementById('splatter-container');
+        const displayFrom = document.getElementById('card-from');
+        const displayMsg = document.getElementById('card-message');
+        const splatterBox = document.getElementById('splatter-container');
         const downloadBtn = document.getElementById('download-btn');
 
-        const generateSplatters = () => {
-            splatterContainer.innerHTML = '';
-            const colors = ['#ff007f', '#00f2ff', '#39ff14', '#fdfd96'];
-            for (let i = 0; i < 5; i++) {
+        // Random Splatters (Fixed for html2canvas compatibility)
+        const updateSplatters = () => {
+            splatterBox.innerHTML = '';
+            const cardColors = ['#ff007f', '#00f2ff', '#39ff14', '#fdfd96'];
+            for (let i = 0; i < 6; i++) {
                 const s = document.createElement('div');
-                const size = Math.random() * 150 + 100 + 'px';
+                const size = Math.random() * 180 + 100 + 'px';
                 Object.assign(s.style, {
                     position: 'absolute', width: size, height: size,
-                    background: colors[i % colors.length], borderRadius: '50%',
-                    top: Math.random() * 80 + '%', left: Math.random() * 80 - 10 + '%',
-                    opacity: '0.4', pointerEvents: 'none', z-index: '1'
+                    background: cardColors[i % cardColors.length], borderRadius: '50%',
+                    top: Math.random() * 90 - 10 + '%', left: Math.random() * 90 - 10 + '%',
+                    opacity: '0.4', filter: 'blur(30px)', pointerEvents: 'none'
                 });
-                splatterContainer.appendChild(s);
+                splatterBox.appendChild(s);
             }
         };
-        generateSplatters();
+        updateSplatters();
 
-        inputFrom?.addEventListener('input', (e) => cardFrom.innerText = e.target.value ? `— From ${e.target.value}` : `— From [Your Name]`);
-        inputMsg?.addEventListener('change', (e) => {
-            cardMsg.innerText = e.target.value;
-            generateSplatters();
+        // Live Name Update
+        inputName?.addEventListener('input', (e) => {
+            const val = e.target.value.trim();
+            displayFrom.innerText = val !== "" ? `— FROM ${val.toUpperCase()}` : "— FROM [YOUR NAME]";
         });
 
+        // Live Message Update
+        inputMsg?.addEventListener('change', (e) => {
+            displayMsg.innerText = e.target.value;
+            updateSplatters(); // New splatters for new message
+        });
+
+        // Image Export Logic
         downloadBtn?.addEventListener('click', async () => {
-            downloadBtn.innerText = "🎨 Creating...";
-            // Use html2canvas library
+            downloadBtn.innerText = "🎨 SAVING...";
+            downloadBtn.style.pointerEvents = "none";
+
             try {
-                const canvasImg = await html2canvas(cardPreview, { 
-                    scale: 2, backgroundColor: "#050505", useCORS: true 
+                const canvasImg = await html2canvas(cardPreview, {
+                    scale: 2, backgroundColor: "#050505", useCORS: true
                 });
                 const link = document.createElement('a');
-                link.download = `Holi_2026_Card.png`;
+                link.download = `Holi_2026_${Date.now()}.png`;
                 link.href = canvasImg.toDataURL("image/png");
                 link.click();
-                downloadBtn.innerText = "✅ Downloaded";
+                downloadBtn.innerText = "✅ DOWNLOADED";
             } catch (err) {
-                alert("Error generating card. Try a screenshot!");
-                downloadBtn.innerText = "Download Failed";
+                console.error(err);
+                alert("Capture failed. Please try a screenshot!");
+                downloadBtn.innerText = "FAILED";
             }
-            setTimeout(() => downloadBtn.innerText = "Download for Insta Story", 3000);
+            setTimeout(() => {
+                downloadBtn.innerText = "DOWNLOAD FOR INSTA STORY";
+                downloadBtn.style.pointerEvents = "auto";
+            }, 3000);
         });
     }
 });
