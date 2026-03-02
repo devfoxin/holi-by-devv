@@ -3,35 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOLI — Fluid Festival</title>
+    <title>HOLI '26 — Fluid Festival</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <canvas id="canvas"></canvas>
+    
+    <div class="blob" style="width:500px; height:500px; background:var(--primary); top:-100px; right:-100px;"></div>
+    <div class="blob" style="width:300px; height:300px; background:var(--secondary); bottom:50px; left:-50px; animation-delay:2s;"></div>
 
     <nav class="glass-nav">
-        <div class="logo">HOLI<span>'26</span></div>
-        <div class="menu-toggle" id="mobile-menu"><span></span><span></span></div>
+        <a href="index.html" class="logo">HOLI<span>'26</span></a>
+        <div class="menu-toggle"><span></span><span></span></div>
         <ul class="nav-links">
-            <li><a href="#mythos">Mythos</a></li>
-            <li><a href="#gallery">Vibe</a></li>
-            <li><a href="#join">Join</a></li>
+            <li><a href="history.html">Mythos</a></li>
+            <li><a href="card.html">Create Card</a></li>
         </ul>
     </nav>
 
     <main>
+        <style>
+            .hero { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 10%; text-align: center; }
+            .hero-content h1 { font-size: clamp(2.5rem, 10vw, 7rem); line-height: 0.85; margin-bottom: 20px; text-transform: uppercase;}
+            .hero-content p { font-family: var(--font-body); font-weight: 300; opacity: 0.8; max-width: 500px; margin: 0 auto 40px auto; font-size: 0.9rem; letter-spacing: 1px; }
+            .btn-group { display: flex; gap: 20px; justify-content: center; }
+            @media (max-width: 768px) { .btn-group { flex-direction: column; align-items: center; } .hero-content h1 { font-size: 3rem; } }
+        </style>
         <section class="hero">
             <div class="hero-content">
-                <h1 class="reveal-text">FESTIVAL OF <br><span class="outline">VIBRANCE</span></h1>
-                <p>Don't just watch the colors. Be the canvas.</p>
+                <h1>Festival <br>of <span class="outline">Vibrance</span></h1>
+                <p>Don't just watch the colors this Spring. Be the canvas.</p>
                 <div class="btn-group">
-                    <button class="primary-btn">Explore History</button>
-                    <button class="secondary-btn">Play with Color</button>
+                    <a href="history.html" class="primary-btn btn">Explore History</a>
+                    <a href="card.html" class="secondary-btn btn">Holi Greeting Card</a>
                 </div>
-            </div>
-            <div class="floating-blobs">
-                <div class="blob b1"></div>
-                <div class="blob b2"></div>
             </div>
         </section>
     </main>
