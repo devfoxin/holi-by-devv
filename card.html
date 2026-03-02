@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Your Holi Card</title>
+    <title>HOLI '26 | Create</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
@@ -15,29 +15,33 @@
         <ul class="nav-links">
             <li><a href="history.html">Mythos</a></li>
             <li><a href="card.html" class="active">Create Card</a></li>
-            <li><a href="creators.html">Creators</a></li>
         </ul>
     </nav>
 
-    <main style="padding-top: 140px; display: flex; flex-direction: column; align-items: center;">
-        
+    <main class="card-page">
         <div id="card-preview">
-            <div id="splatter-container" style="position: absolute; top:0; left:0; width:100%; height:100%;"></div>
+            <div id="splatter-container"></div>
             <div class="card-content">
                 <h2 id="card-greeting">HAPPY <br><span>HOLI</span></h2>
-                <p id="card-message">May your life be as vibrant and colorful as the festival itself.</p>
+                <p id="card-message">May your life be as vibrant as these colors.</p>
                 <p id="card-from">— FROM [YOUR NAME]</p>
             </div>
         </div>
 
         <section class="controls">
-            <input type="text" id="input-from" placeholder="Enter Your Name" maxlength="20">
+            <div class="input-group">
+                <label>PERSONALIZE YOUR NAME</label>
+                <input type="text" id="input-from" placeholder="Type your name..." maxlength="20">
+            </div>
             
-            <select id="input-message">
-                <option value="May your life be as vibrant and colorful as the festival itself.">The Classic Vibe</option>
-                <option value="Drenched in joy, dipped in colors. Wishing you a messy, fun Holi!">The Party Vibe</option>
-                <option value="Let the colors of Holi paint a path to success and prosperity.">The Success Vibe</option>
-            </select>
+            <div class="input-group">
+                <label>CHOOSE A VIBE</label>
+                <select id="input-message">
+                    <option value="May your life be as vibrant as these colors.">Classic</option>
+                    <option value="Drenched in joy, dipped in colors. Let's party!">Party</option>
+                    <option value="Wishing you a year full of light and success.">Professional</option>
+                </select>
+            </div>
 
             <button id="download-btn" class="primary-btn btn">DOWNLOAD FOR INSTA STORY</button>
         </section>
