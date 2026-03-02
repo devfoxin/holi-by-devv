@@ -69,5 +69,69 @@ button, .btn {
 @media (max-width: 768px) {
     .nav-links { display: none; } /* Real hamburger menu logic needs JS */
     .menu-toggle { display: flex; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&family=Syncopate:wght@700&display=swap');
+
+:root {
+    --primary: #ff007f;
+    --secondary: #00f2ff;
+    --bg: #050505;
+    --glass: rgba(255, 255, 255, 0.05);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Aesthetic Noise Overlay */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.04; pointer-events: none; z-index: 999;
+}
+
+h1, h2, .logo { font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+
+canvas#canvas { position: fixed; top: 0; left: 0; z-index: 1; pointer-events: none; }
+
+/* Navigation */
+.glass-nav {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 90%; max-width: 1100px; padding: 1rem 2rem;
+    background: var(--glass); backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 100px;
+    display: flex; justify-content: space-between; align-items: center; z-index: 1000;
+}
+.logo { font-size: 1rem; letter-spacing: 2px; text-decoration: none; color: white; }
+.logo span { color: var(--primary); }
+.nav-links { display: flex; gap: 20px; list-style: none; }
+.nav-links a { color: white; text-decoration: none; font-size: 0.7rem; letter-spacing: 1px; opacity: 0.7; transition: 0.3s; }
+.nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--secondary); }
+
+/* Buttons */
+.btn {
+    padding: 14px 28px; border-radius: 50px; border: none;
+    font-family: 'Syncopate', sans-serif; font-size: 0.65rem;
+    cursor: pointer; text-decoration: none; display: inline-block;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.primary-btn { background: white; color: black; }
+.secondary-btn { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.2); }
+.primary-btn:hover { transform: scale(1.05); background: var(--primary); color: white; }
+
+/* Background Blobs */
+.blob { position: fixed; filter: blur(80px); border-radius: 50%; z-index: -1; opacity: 0.25; pointer-events: none; }
+
+@media (max-width: 768px) {
+    .nav-links { display: none; } /* Simplified for demo - you can add a burger icon */
+    .glass-nav { padding: 1rem; width: 95%; }
+}
     .glass-nav { padding: 1rem; width: 95%; }
 }
