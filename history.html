@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYTHOS — The Story of Holi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .history-page { padding-top: 150px; padding-bottom: 100px; max-width: 1200px; margin: 0 auto; padding-left: 5%; padding-right: 5%; }
+        .page-header { margin-bottom: 100px; text-align: center; }
+        .page-header h1 { font-size: clamp(3rem, 8vw, 6rem); text-transform: uppercase;}
+        .page-header p { opacity: 0.6; text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; margin-top: 10px; }
+        
+        /* Editorial layout */
+        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 150px;}
+        .story-section { position: relative; }
+        .section-num { font-family: var(--font-main); font-size: 8rem; font-weight: 700; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.2); position: absolute; top: -70px; left: -30px; z-index: -1;}
+        .story-section h2 { font-size: 2rem; text-transform: uppercase; margin-bottom: 20px; color: var(--secondary); }
+        .story-section p { font-size: 1rem; line-height: 1.8; opacity: 0.8; font-weight: 300; margin-bottom: 20px;}
+        
+        .divider { width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 80px; }
+
+        @media (max-width: 768px) {
+            .story-grid { grid-template-columns: 1fr; gap: 60px; }
+            .section-num { font-size: 5rem; top: -40px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    
+    <div class="blob" style="width:600px; height:600px; background:var(--purple); bottom:-200px; right:-100px; opacity: 0.2;"></div>
+
+    <nav class="glass-nav">
+        <a href="index.html" class="logo">HOLI<span>'26</span></a>
+        <ul class="nav-links">
+            <li><a href="history.html" class="active">Mythos</a></li>
+            <li><a href="card.html">Create Card</a></li>
+        </ul>
+    </nav>
+
+    <main class="history-page">
+        <header class="page-header">
+            <p>From Ashes to Color</p>
+            <h1>The <span class="outline">Mythos</span></h1>
+        </header>
+
+        <section class="story-grid">
+            <div class="story-section">
+                <div class="section-num">01</div>
+                <h2>The Tyrant King</h2>
+                <p>Before the colors, there was a dark reign. Hiranyakashipu, a demon king, conquered earth and commanded everyone to worship him as a God. His power was absolute, yet his ego was fragile.</p>
+            </div>
+            <div class="story-section">
+                <div class="section-num">02</div>
+                <h2>The Devout Son</h2>
+                <p>The king's own son, Prahlad, refused. He remained a steadfast devotee of Lord Vishnu. This defiance enraged the King, who saw his son’s devotion not as piety, but as treason punishable by death.</p>
+            </div>
+        </section>
+        
+        <div class="divider"></div>
+
+        <section class="story-grid">
+            <div class="story-section">
+                <div class="section-num">03</div>
+                <h2>The Fire Plot</h2>
+                <p>After many failed attempts to kill Prahlad, the king turned to his sister, Holika. She possessed a magical shawl that made her immune to fire. She tricked Prahlad into sitting on her lap within a roaring pyre.</p>
+            </div>
+            <div class="story-section">
+                <div class="section-num">04</div>
+                <h2>Triumph of Good</h2>
+                <p>As fire consumed them, Prahlad prayed. A divine wind transferred the shawl from Holika to the boy. Holika perished in the flames she thought she controlled. This victory of devotion over deceit is celebrated as the pyre of Holi Eve.</p>
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-top: 100px;">
+            <a href="card.html" class="primary-btn btn">Celebrate the Victory</a>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
