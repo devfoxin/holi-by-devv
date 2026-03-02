@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREATORS — The Minds Behind the Color</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .creators-container {
+            padding: 150px 10% 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .creators-header { margin-bottom: 80px; }
+        .creators-header h1 { font-size: clamp(2.5rem, 8vw, 5rem); text-transform: uppercase; }
+        .creators-header p { opacity: 0.6; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; }
+
+        /* Staggered Grid Layout */
+        .creator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .creator-card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover effect: Card lifts and glows */
+        .creator-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 40px rgba(0, 242, 255, 0.1);
+        }
+
+        .creator-img {
+            width: 100px;
+            height: 100px;
+            background: #222;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        /* This creates a colorful placeholder if you don't have photos yet */
+        .creator-img.p1 { background: linear-gradient(45deg, var(--primary), var(--purple)); }
+        .creator-img.p2 { background: linear-gradient(45deg, var(--secondary), var(--yellow)); }
+
+        .creator-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .creator-role {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--primary);
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .creator-bio {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.7;
+            margin-bottom: 30px;
+        }
+
+        .social-links { display: flex; gap: 15px; }
+        .social-links a {
+            font-size: 0.7rem;
+            text-decoration: none;
+            color: white;
+            padding: 8px 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background: white;
+            color: black;
+        }
+
+        /* Aesthetic "Chaos" Decoration */
+        .creator-card::after {
+            content: 'CREATIVE';
+            position: absolute;
+            bottom: -20px;
+            right: -10px;
+            font-family: var(--font-main);
+            font-size: 4rem;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .creators-container { padding-top: 120px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <nav class="glass-nav">
+        <a href="index.html" class="logo">HOLI<span>'26</span></a>
+        <ul class="nav-links">
+            <li><a href="history.html">Mythos</a></li>
+            <li><a href="card.html">Create Card</a></li>
+            <li><a href="creators.html" class="active">Creators</a></li>
+        </ul>
+    </nav>
+
+    <main class="creators-container">
+        <header class="creators-header">
+            <p>The Creative Pulse</p>
+            <h1>Meet the <span class="outline">Visionaries</span></h1>
+        </header>
+
+        <section class="creator-grid">
+            <div class="creator-card">
+                <div class="creator-img p1">
+                    </div>
+                <span class="creator-role">Lead Experience Designer</span>
+                <h2>ARYAN SHARMA</h2>
+                <p class="creator-bio">Obsessed with digital motion and the intersection of traditional culture and modern UI. Handled the interactive "Digital Gulaal" physics.</p>
+                <div class="social-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">GitHub</a>
+                </div>
+            </div>
+
+            <div class="creator-card">
+                <div class="creator-img p2"></div>
+                <span class="creator-role">Creative Technologist</span>
+                <h2>ISHA VERMA</h2>
+                <p class="creator-bio">Specializes in generative art and canvas-based animations. Isha focused on the Greeting Card engine and social share features.</p>
+                <div class="social-links">
+                    <a href="#">Behance</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
